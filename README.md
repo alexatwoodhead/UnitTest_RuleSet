@@ -23,7 +23,7 @@ When messages are routed they generate logs with two interesting properties:
 Exact or Contains (Default) matching to values for these log properies are baked into the unit tests.
 The subsequent UnitTest requires these expected routing outcomes are confirmed during testing.
 
-The output of tests are recorded and available via the noraml test url.
+The output of tests are recorded and available via the normal test url.
 This is dispayed at the conclusion of the unit test on the command line.
 
 ![Display Terminal output at end of test](/images/TestResults0.png "Display Terminal output at end of test")

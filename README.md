@@ -14,6 +14,25 @@ To run all UnitTest on a new UnitTest class manually:
 Do ##class(UnitTest.RuleSet.Example).Debug()
 ```
 
+
+
+# How it works
+When messages are routed they generate logs with two interesting properties:
+* Reason - This will contain the Rule number that processed: "rule#1(SYSA):when#1"
+* ReturnValue - This will contain the name of the routing target used: "send:To_SystemA: 	"
+Exact or Contains (Default) matching to values for these log properies are baked into the unit tests.
+The subsequent UnitTest requires these expected routing outcomes are confirmed during testing.
+
+The output of tests are recorded and available via the noraml test url.
+This is dispayed at the conclusion of the unit test on the command line.
+
+![Display Terminal output at end of test](/images/TestResults0.png "Display Terminal output at end of test")
+
+![Summary of Test Run](/images/TestResults.png "Summary of Test Run")
+
+![Detail of Test Run](/images/TestResults2.png "Detail of Test Run")
+
+
 # Environment configuration
 Leveraging the built-in TestCase Runner we require that the global "UnitTestRoot" points to a physical directory for example "c:\temp"
 ```

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2022.1 (Build 191U)" ts="2022-07-13 13:42:49">
+<Class name="UnitTest.RuleSet.TestHL7.RoutingRule">
+<Description><![CDATA[
+<pre>
+Copyright (c) Alex Woodhead 2022
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+License MIT
+Source: https://github.com/alexatwoodhead/UnitTest_RuleSet
+Version: 1.0
+</pre>]]]]><![CDATA[> ]]></Description>
+<Super>Ens.Rule.Definition</Super>
+<TimeChanged>66303,49306.9213953</TimeChanged>
+<TimeCreated>66302,83723.1276553</TimeCreated>
+
+<Parameter name="RuleAssistClass">
+<Default>EnsLib.HL7.MsgRouter.RuleAssist</Default>
+</Parameter>
+
+<XData name="RuleDefinition">
+<XMLNamespace>http://www.intersystems.com/rule</XMLNamespace>
+<Data><![CDATA[
+<ruleDefinition alias="" context="EnsLib.HL7.MsgRouter.RoutingEngine" production="UnitTest.RuleSet.TestHL7">
+<ruleSet name="" effectiveBegin="" effectiveEnd="">
+<rule name="SYSA">
+<constraint name="source" value="From_SystemZ"></constraint>
+<when condition="Document.{MSH:3}=&quot;SYSA&quot;">
+<send transform="" target="To_SystemA"></send>
+<return></return>
+</when>
+</rule>
+<rule name="SYSB" disabled="false">
+<constraint name="source" value="From_SystemZ"></constraint>
+<when condition="Document.{MSH:3}=&quot;SYSB&quot;">
+<send transform="" target="To_SystemB"></send>
+<return></return>
+</when>
+</rule>
+<rule name="SYSC" disabled="false">
+<constraint name="source" value="From_SystemZ"></constraint>
+<when condition="Document.{MSH:3}=&quot;SYSC&quot;">
+<send transform="" target="To_SystemC"></send>
+<return></return>
+</when>
+</rule>
+</ruleSet>
+</ruleDefinition>
+]]></Data>
+</XData>
+</Class>
+</Export>

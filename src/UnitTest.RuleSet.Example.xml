@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="IRIS" version="26" zv="IRIS for Windows (x86-64) 2022.1 (Build 191U)" ts="2022-07-13 13:42:24">
+<Class name="UnitTest.RuleSet.Example">
+<Description><![CDATA[
+<pre>
+Copyright (c) Alex Woodhead 2022
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+License MIT
+Source: https://github.com/alexatwoodhead/UnitTest_RuleSet
+Version: 1.0
+</pre>]]]]><![CDATA[>
+To run a Unit Test from console.
+<example>
+d ##class(UnitTest.RuleSet.Example).Debug()
+</example>]]></Description>
+<Super>UnitTest.RuleSet.HL7</Super>
+<TimeChanged>66303,49286.0695643</TimeChanged>
+<TimeCreated>66302,86367.0873481</TimeCreated>
+
+<Parameter name="TestSuite">
+<Default>RuleSetHL7</Default>
+</Parameter>
+
+<Parameter name="HL7Schema">
+<Description>
+Override for different schema</Description>
+<Default>2.5.1:OUL_R22</Default>
+</Parameter>
+
+<Parameter name="SourceBusinessServiceName">
+<Description>
+Override with name of existing service on production</Description>
+<Default>From_SystemZ</Default>
+</Parameter>
+
+<Parameter name="TargetConfigName">
+<Description>
+Override with name of existing business process routing engine on production</Description>
+<Default>MsgRouter</Default>
+</Parameter>
+
+<Method name="TestMessageA">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.PokeDocType(message.DocType)
+	do message.SetValueAt("SYSA","MSH:3.1")
+	set expectSuccess=1
+	set expectReturn="send:To_SystemA:"
+	set expectReason="rule#1"
+	do ..SendMessage(message,"TestMessageA", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageB">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.SetValueAt("SYSB","MSH:3.1")
+	set expectSuccess=1
+	set expectReturn="send:To_SystemB:"
+	set expectReason="rule#2"
+	do ..SendMessage(message,"TestMessageB", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageC">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.SetValueAt("SYSC","MSH:3.1")
+	set expectSuccess=1
+	set expectReturn="send:To_SystemC:"
+	set expectReason="rule#3"
+	do ..SendMessage(message,"TestMessageC", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageNotSuccessReasonA">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.PokeDocType(message.DocType)
+	do message.SetValueAt("SYSA","MSH:3.1")
+	set expectSuccess=0
+	set expectReturn=""
+	set expectReason="rule#2"
+	do ..SendMessage(message,"TestMessageA", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageNotSuccessReasonB">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.SetValueAt("SYSB","MSH:3.1")
+	set expectSuccess=0
+	set expectReturn=""
+	set expectReason="rule#3"
+	do ..SendMessage(message,"TestMessageB", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageNotSuccessReasonC">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.SetValueAt("SYSC","MSH:3.1")
+	set expectSuccess=0
+	set expectReturn=""
+	set expectReason="rule#1"
+	do ..SendMessage(message,"TestMessageC", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageNotSuccessReturnA">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.PokeDocType(message.DocType)
+	do message.SetValueAt("SYSA","MSH:3.1")
+	set expectSuccess=0
+	set expectReturn="send:To_SystemB:"
+	set expectReason=""
+	do ..SendMessage(message,"TestMessageA", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageNotSuccessReturnB">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.SetValueAt("SYSB","MSH:3.1")
+	set expectSuccess=0
+	set expectReturn="send:To_SystemC:"
+	set expectReason=""
+	do ..SendMessage(message,"TestMessageB", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<Method name="TestMessageNotSuccessReturnC">
+<Implementation><![CDATA[
+	#dim message as EnsLib.HL7.Message
+	set message=..HL7Message.%ConstructClone(1)
+	do message.SetValueAt("SYSC","MSH:3.1")
+	set expectSuccess=0
+	set expectReturn="send:To_SystemA:"
+	set expectReason=""
+	do ..SendMessage(message,"TestMessageC", expectSuccess, expectReturn, expectReason)
+]]></Implementation>
+</Method>
+
+<XData name="SourceMessage">
+<Data><![CDATA[
+<test><![CDATA[
+MSH|^~\&|FRM|FRM5T|SYSA|SYSA|202207121010||OUL^R22^OUL_R22|1234567|P|2.5|||||GBR||EN
+PID|||123456789^^^NHS^NH~12345^^^774^PI||SMITH^BOB^^^||19830501|M||||||||||||||||||||||N
+PV1||N|ANT5TREE^^^^^^^^MH Anticoagulant Clinic,||||C123546^Bowden^S M^^^Dr|||101|ANT5T^^^^^^^^Harbor|||||||||||||||||||||||||||||||||20220712101010
+SPM|1|^62000001||03^PLA-CIT^DDN|||||||||||||20220712101010|20220712101010
+OBR|1||120000000001^DDN|^International normalised ratio (INR) dose^RC^B0281^INRD^TCL||20220712101010||||||||||C123546^Bowden^S M^^^Dr|||||1|20220712101010||B|C|||||||tim223|||||||||||||||HNM^Haematology(Multiple T/S)^^AUTH
+ORC|SC||120000000001^DDN||||||20220712101010|||C123546^Bowden^S M^^^Dr|||||||||Mariden University Health Board^^ANT5|||||||N
+OBX|1|SN|42QE.^International normalised ratio^RC^B0700^INR^TCL|1|^1.6|ratio^^TCL||N|||C|||20150519122300||tim223
+OBX|2|TX|^Warfarin Dose^RC^B0850^DOSE^TCL|2||||N|||C|||20220712101010||tim223
+NTE|1|L|INR: 1.6 Target 3.0 - 4.0  L
+NTE|2|L|Full Dosing Instruction:
+NTE|3|L|7 mg DAILY
+NTE|4|L|Next Test: 16/07/2022
+]]]]><![CDATA[></test>
+]]></Data>
+</XData>
+</Class>
+</Export>

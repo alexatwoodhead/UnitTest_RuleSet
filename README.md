@@ -10,7 +10,7 @@ Also included to demonstrate implementation:
 * UnitTest.RuleSet.TestHL7.RoutingRule - An example routing rules to be tested
 
 To run all UnitTest on a new UnitTest class manually:
-```
+```objectscript
 Do ##class(UnitTest.RuleSet.Example).Debug()
 ```
 
@@ -53,7 +53,7 @@ Define a class overriding <em>UnitTest.RuleSet.HL7</em> :
 5. Create new Methods with names prefixed "Test". These will invoke the method "SendMessage" with critera about the message routing result expected.
 6. XData SourceMessage - Replace with base HL7 messages suitable to your business need. Note the HL7Schema should match to effect per-test updates.
 
-```
+```objectscript
 /// d ##class(UnitTest.RuleSet.Example).Debug()
 Class UnitTest.RuleSet.Example Extends UnitTest.RuleSet.HL7
 {
